@@ -4,16 +4,16 @@ var width = 900,
     weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
     month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 	
-var day = d3.time.format("%w"),
-    week = d3.time.format("%U"),
+var day = d3.timeFormat("%w"),
+    week = d3.timeFormat("%U"),
     percent = d3.format(".1%"),
-	  format = d3.time.format("%Y-%m-%d");
-parseDate = d3.time.format("%Y-%m-%d").parse;
+	  format = d3.timeFormat("%Y-%m-%d");
+parseDate = d3.timeParse("%Y-%m-%d");
 		
 /* var colorScale = d3.scale.linear()
     .range(["#fdfbf2", '#ff0000'])
     .domain([0, 4]) */
-var colorScale = d3.scale.linear();
+var colorScale = d3.scaleThreshold();
 colors = ['#ffffcc','#a1dab4','#41b6c4','#2c7fb8','#253494'];
 colors = ['#ffffd4','#fed98e','#fe9929','#d95f0e','#993404'];
 colorScale.domain([0,1,2,3,4]).range(colors);
@@ -42,7 +42,7 @@ for (var i=0; i<4; i++) {
 }
 
 var rect = svg.selectAll(".day")
-    .data(function(d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+    .data(function(d) { return d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
     .enter().append("rect")
     .attr("class", "day")
     .attr("width", cellSize)
@@ -65,13 +65,14 @@ legend.append("text")
    .text(function(d,i){ return month[i] });
    
 svg.selectAll(".month")
-    .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
+    .data(function(d) { return d3.timeMonths(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
   .enter().append("path")
     .attr("class", "month")
     .attr("id", function(d,i){ return month[i] })
     .attr("d", monthPath);
 
-d3.csv("static/data/calendar.txt", function(error, csv) {
+d3.csv("https://gist.githubusercontent.com/caocscar/aaecc69a00db90fd385f41f2e65e6471/raw/e3f461d6d233432ad2d53affdda628857ef3e9bb/calendar.csv",
+ function(error, csv) {
 
   csv.forEach(function(d) {
     d.ct = parseInt(d.ct);
@@ -85,9 +86,9 @@ d3.csv("static/data/calendar.txt", function(error, csv) {
     .map(csv);
 	
   rect.filter(function(d) { return d in data; })
-    .attr("fill", function(d) { return colorScale(data[d]); })
-	  .attr("data-title", function(d) { return "Sales: "+data[d]});   
-  $("rect").tooltip({container: 'body', html: true, placement:'top'}); 
+  .style("fill", function(d) {return colorScale(data.get(d)); })
+  .attr("data-title", function(d) { return "Sales: "+data[d]});   
+  // $("rect").tooltip({container: 'body', html: true, placement:'top'}); 
   
 });
 
