@@ -10,18 +10,22 @@ var day = d3.time.format("%w"),
 	  format = d3.time.format("%Y-%m-%d");
 parseDate = d3.time.format("%Y-%m-%d").parse;
 		
-var color = d3.scale.linear()
+/* var colorScale = d3.scale.linear()
     .range(["#fdfbf2", '#ff0000'])
-    .domain([0, 4])
+    .domain([0, 4]) */
+var colorScale = d3.scale.linear();
+colors = ['#ffffcc','#a1dab4','#41b6c4','#2c7fb8','#253494'];
+colors = ['#ffffd4','#fed98e','#fe9929','#d95f0e','#993404'];
+colorScale.domain([0,1,2,3,4]).range(colors);
     
 var svg = d3.select(".calender-map").selectAll("svg")
-    .data(d3.range(2008, 2019))
-  .enter().append("svg")
+    .data(d3.range(2015, 2019))
+    .enter().append("svg")
     .attr("width", '100%')
     .attr("data-height", '0.5678')
     .attr("viewBox",'0 0 900 85')
     .attr("class", "RdYlGn")
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
 svg.append("text")
@@ -29,12 +33,12 @@ svg.append("text")
     .style("text-anchor", "middle")
     .text(function(d) { return d; });
  
-for (var i=0; i<7; i++) {    
+for (var i=0; i<4; i++) {    
   svg.append("text")
-      .attr("transform", "translate(-5," + cellSize*(i+1) + ")")
+      .attr("transform", "translate(-5," + cellSize*(2*i+1) + ")")
       .style("text-anchor", "end")
       .attr("dy", "-.25em")
-      .text(function(d) { return weekdays[i]; }); 
+      .text(function(d) { return weekdays[2*i]; }); 
 }
 
 var rect = svg.selectAll(".day")
@@ -81,19 +85,11 @@ d3.csv("static/data/calendar.txt", function(error, csv) {
     .map(csv);
 	
   rect.filter(function(d) { return d in data; })
-    .attr("fill", function(d) { return color(data[d]); })
+    .attr("fill", function(d) { return colorScale(data[d]); })
 	  .attr("data-title", function(d) { return "Sales: "+data[d]});   
   $("rect").tooltip({container: 'body', html: true, placement:'top'}); 
   
 });
-
-/* function numberWithCommas(x) {
-    x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x))
-        x = x.replace(pattern, "$1,$2");
-    return x;
-} */
 
 function monthPath(t0) {
   var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
