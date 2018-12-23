@@ -7,9 +7,7 @@ Created on Fri Feb 10 10:59:14 2017
 
 import pandas as pd
 import os
-
-key = os.getenv('honda_gmap')
-apikey = 'key={}'.format(key)
+from datetime import datetime
 
 pd.options.display.max_rows = 16
 pd.options.display.max_columns = 16
@@ -57,25 +55,8 @@ sales = sales.fillna(0).astype(int)
 # Create Total column
 sales['Total'] = sales.sum(axis=1)
 
-
-
-#%% Create json file for gmap_choropleth_geojson_fusion_eventhandling.html
-#with open(os.path.join(wdir,'statedata.js'),'w') as fout:
-#    fout.write('var statedata = ')
-#    sales.to_json(fout, orient='index')    
-
-#%% Take screenshot
-# You might need to update to the latest chromedriver.exe in the Anaconda3 folder
-#if screenshot_flag:    
-#    from selenium import webdriver
-#    import time
-#    
-#    driver = webdriver.Chrome(r'C:\Users\caoa\AppData\Local\Continuum\Anaconda3\chromedriver.exe')
-#    driver.set_window_size(1500,900)
-#    # Make sure server is started in correct directory
-#    # python -m http.server 8080
-#    driver.get('localhost:8080/gmap_choropleth_geojson_fusion_eventhandling.html') # or 127.0.0.1:8080
-#    time.sleep(1)
-#    wallpaperdir = r'C:\Users\caoa\Desktop\wallpaper'
-#    driver.get_screenshot_as_file(os.path.join(wallpaperdir,'choropleth.png'))
-#    driver.quit()
+#%% Output long format for d3calendar
+cal = orders[['DateID']].resample('D', on='DateID').count()
+cal.columns = ['count']
+cal.index.name = 'date'
+cal.to_csv(os.path.join(wdir,'calendar.csv'))
