@@ -53,10 +53,17 @@ sales = state_names.merge(sales, how='left', left_index=True, right_index=True)
 sales.set_index('state', inplace=True)
 sales = sales.fillna(0).astype(int)
 # Create Total column
-sales['Total'] = sales.sum(axis=1)
+sales['value'] = sales.sum(axis=1)
 
 #%% Output long format for d3calendar
 cal = orders[['DateID']].resample('D', on='DateID').count()
 cal.columns = ['count']
 cal.index.name = 'date'
 cal.to_csv(os.path.join(wdir,'calendar.csv'))
+
+#%% Output long format for choropleth
+sales[['value']].to_csv(os.path.join(wdir,'choropleth.csv'))
+
+
+
+
