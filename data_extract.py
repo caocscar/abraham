@@ -8,12 +8,10 @@ Created on Fri Feb 10 10:59:14 2017
 import pandas as pd
 import os
 import json
+from itertools import chain
 
 pd.options.display.max_rows = 16
 pd.options.display.max_columns = 16
-
-screenshot_flag = True # for wallpaper
-update_fusion_table_flag = True # for website
 
 #%% Read data
 wdir = os.path.join('static','data')
@@ -55,16 +53,16 @@ sales = sales.fillna(0).astype(int)
 # Create Total column
 sales['value'] = sales.sum(axis=1)
 
-#%% Output long format for d3calendar
+#%% csv long format for d3calendar
 cal = orders[['DateID']].resample('D', on='DateID').count()
 cal.columns = ['count']
 cal.index.name = 'date'
 cal.to_csv(os.path.join(wdir,'calendar.csv'))
 
-#%% Output long format for choropleth
+#%% csv format for choropleth
 sales[['value']].to_csv(os.path.join(wdir,'choropleth.csv'))
 
-#%% Output format for treemap
+#%% json format for treemap
 tree = fa.groupby(['Site','Type'])['Selling Price'].sum()
 sitecat = fa.groupby(['Site'])['Type'].unique()
 
@@ -78,6 +76,39 @@ for site in sitecat.index:
     
 with open(os.path.join(wdir,'treemap.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=float)
+
+#%% sankey format
+origin_dict = {'F':'Free','C':'Paid','N':'Wife','G':'Gift','A':'Friends'}      
+sankey = fa.copy()
+sankey['Shipping Method'].replace('','In Person', inplace=True)
+sankey['Origin'].replace(origin_dict, inplace=True)
+
+columns = ['Origin','Site','Type','Shipping Method']
+list_nodes = []
+for column in columns:
+    list_nodes.append(list(set(sankey[column])) )
+nodes = list(chain.from_iterable(list_nodes))
+
+list_flows = []
+for i in range(len(columns)-1):
+    cols = columns[i:i+2]
+    flow = sankey.groupby(cols)['TransID'].count()
+    tmp = flow.reset_index()
+    tmp.columns = ['source','target','value']
+    list_flows.append(tmp)
+
+df = pd.concat(list_flows, ignore_index=True)
+# csv format for sankey
+df.to_csv(os.path.join(wdir,'sankey.csv'), index=False)
+
+# json format for sankey
+data = {'nodes':[{'name':n} for n in nodes],
+        'links':df.to_dict(orient='records')}
+with open(os.path.join(wdir,'sankey.json'),'w') as fout:
+    json.dump(data, fout, indent=2, default=int)
+
+
+
 
 
 
