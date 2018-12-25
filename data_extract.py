@@ -7,7 +7,7 @@ Created on Fri Feb 10 10:59:14 2017
 
 import pandas as pd
 import os
-from datetime import datetime
+import json
 
 pd.options.display.max_rows = 16
 pd.options.display.max_columns = 16
@@ -64,6 +64,20 @@ cal.to_csv(os.path.join(wdir,'calendar.csv'))
 #%% Output long format for choropleth
 sales[['value']].to_csv(os.path.join(wdir,'choropleth.csv'))
 
+#%% Output format for treemap
+tree = fa.groupby(['Site','Type'])['Selling Price'].sum()
+sitecat = fa.groupby(['Site'])['Type'].unique()
+
+data = {'name':'fa','children':[]}
+for site in sitecat.index:
+    C1 = {'name':site,'children':[]}
+    for cat in sitecat.at[site]:
+        C2 = {'name':cat,'size':tree[site][cat]}
+        C1['children'].append(C2)
+    data['children'].append(C1)
+    
+with open(os.path.join(wdir,'treemap.json'),'w') as fout:
+    json.dump(data, fout, indent=2, default=float)
 
 
 
