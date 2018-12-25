@@ -5,7 +5,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
-    <link rel="stylesheet" href="choropleth.css">
+    <link rel="stylesheet" href="static/css/choropleth.css">
 </head>
 <body>
 <script>
@@ -41,7 +41,7 @@ var tooltipDiv = d3.select("body")
             .style("display", "none");
 
 // Load in my states data!
-d3.csv("choropleth.csv", function(data) {
+d3.csv("static/data/choropleth.csv", function(data) {
     var dataArray = [];
     for (var d=0; d < data.length; d++) {
       dataArray.push(parseFloat(data[d].value))
