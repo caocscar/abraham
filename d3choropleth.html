@@ -54,7 +54,7 @@ d3.csv("static/data/choropleth.csv", function(data) {
                     .range(palette);
 	
     // Load GeoJSON data and merge with states data
-    d3.json("us-states.json", function(json) {
+    d3.json("static/data/us-states.json", function(json) {
 
     // Loop through each state data value in the .csv file
     for (var i = 0; i < data.length; i++) {
