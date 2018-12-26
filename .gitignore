@@ -1,5 +1,7 @@
-# Flask
-static/data/
+# Data
+Customers.txt
+Orders.txt
+statedata.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

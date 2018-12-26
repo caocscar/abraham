@@ -46,7 +46,7 @@ sales = sales.fillna(0).astype(int)
 sales.drop('', axis=0, inplace=True)
 
 #%% Replace state abbreviation with full name
-state_names = pd.read_csv(os.path.join(wdir,'state_abbreviation.txt'), sep='\t', index_col=0)
+state_names = pd.read_csv(os.path.join(wdir,'state_abbreviations.txt'), sep='\t', index_col=0)
 sales = state_names.merge(sales, how='left', left_index=True, right_index=True)
 sales.set_index('state', inplace=True)
 sales = sales.fillna(0).astype(int)
