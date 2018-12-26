@@ -117,8 +117,7 @@
 	            .attr("class", "tooltip")
 	            .style("display", "none");
 
-	d3.csv("static/data/calendar.csv", function(error, csv) {
-		if (error) throw error;
+	d3.csv("static/data/calendar.csv").then(function(csv) {
 
 		csv.forEach(function(d) {
 			d.count= +d.count;

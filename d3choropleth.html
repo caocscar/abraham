@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
     <link rel="stylesheet" href="static/css/choropleth.css">
@@ -41,7 +41,7 @@ var tooltipDiv = d3.select("body")
             .style("display", "none");
 
 // Load in my states data!
-d3.csv("static/data/choropleth.csv", function(data) {
+d3.csv("static/data/choropleth.csv").then(function(data) {
     var dataArray = [];
     for (var d=0; d < data.length; d++) {
       dataArray.push(parseFloat(data[d].value))
@@ -54,7 +54,7 @@ d3.csv("static/data/choropleth.csv", function(data) {
                     .range(palette);
 	
     // Load GeoJSON data and merge with states data
-    d3.json("static/data/us-states.json", function(json) {
+    d3.json("static/data/us-states.json").then(function(json) {
 
     // Loop through each state data value in the .csv file
     for (var i = 0; i < data.length; i++) {

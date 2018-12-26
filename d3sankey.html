@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>Sankey d3js v4</title>
+<title>Sankey d3js v5</title>
 
 <body>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="static/js/sankey.js"></script>
 <link rel="stylesheet" href="static/css/sankey.css">
 <script>
@@ -16,7 +16,7 @@ var margin = {top: 10, right: 10, bottom: 10, left: 10},
 // format variables
 var formatNumber = d3.format(",.0f"),    // zero decimal places
     format = function(d) { return formatNumber(d) + " Items" },
-    color = d3.scaleOrdinal(d3.schemeCategory20b);
+    color = d3.scaleOrdinal(d3.schemePaired);
 
 // append the svg object to the body of the page
 var svg = d3.select("body").append("svg")
