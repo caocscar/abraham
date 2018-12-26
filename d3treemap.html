@@ -27,7 +27,7 @@ const div = d3.select("body").append("div")
     .style("left", margin.left + "px")
     .style("top", margin.top + "px");
 
-d3.json("static/data/treemap.json".then(function(data) {
+d3.json("static/data/treemap.json").then(function(data) {
 
   const root = d3.hierarchy(data, (d) => d.children)
     .sum((d) => d.size);
