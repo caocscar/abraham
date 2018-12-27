@@ -1,0 +1,99 @@
+<!-- Fork of an original work by Mike (https://codepen.io/mwhite/pen/LGBvyz) -->
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Foster Abe Landing Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="static/js/index.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="static/css/navigation.css">
+</head>
+<body>
+  <nav class="container-fluid nav">
+  <div class="container cf">
+    <div class="brand">
+      <a href="#splash">Welcome</a>
+    </div>
+    <i class="fa fa-bars nav-toggle"></i>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#locations">Locations</a></li>
+      <li><a href="#dataviz">Data Viz</a></li>
+      <!-- <li><a href="#contact">Contact</a></li> -->
+    </ul>
+  </div>
+  </nav>
+
+  <div class="container-fluid splash" id="splash">
+    <div class="container">
+      <img src="https://unsplash.it/800/450?image=77" alt="Portrait of Mr. Abe" class="profile-image">
+      <h1>Foster Abe</h1>
+      <span class="lead">Est. 2008</span>
+      <span class="continue"><a href="#about"><i class="fa fa-angle-down"></i></a></span>
+    </div>
+  </div>
+
+  <div class="container-fluid intro" id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>Offloading stuff and selling junk for a decade</p>
+    </div>
+  </div>
+
+  <div class="container-fluid features" id="skills">
+    <div class="container cf">
+      <h2>Locations</h2>
+      <div class="col-3">
+        <img src="https://s22.postimg.org/oi5es3fkx/icon_cloud.png" alt="A">
+        <h3>Georgia</h3>
+        <p>Atlanta, Conyers, Avondale, Decatur, Stone Mountain, Tucker, Alpharetta, Marietta, Austell</p>
+      </div>
+      <div class="col-3">
+        <img src="https://s22.postimg.org/jxj8d5vvl/icon_coding.png" alt="B">
+        <h3>South Carolina</h3>
+        <p>Columbia, Lexington, Charleston, Greenville, Florence, Chapin, Lake Murray, Spartanburg</p>
+      </div>
+      <div class="col-3">
+        <img src="https://s22.postimg.org/citwksa01/icon_graph.png" alt="C">
+        <h3>Michigan</h3>
+        <p>Detroit, Farmington Hills, Grosse Pointe, Ann Arbor, Ypsilanti, Novi, Saline, Flint, Kalamazoo</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid portfolio" id="dataviz">
+    <div class="container cf">
+      <h2>Data Viz</h2>
+      <div class="gallery">
+        <div class="gallery-image">
+          <a href="d3calendar.html"><img src="static/img/calendar.jpg" alt="calendar"></a>
+        </div>
+        <div class="gallery-image">
+            <a href="d3choropleth.html"><img src="static/img/choropleth.jpg" alt="choropleth"></a>
+        </div>
+        <div class="gallery-image">
+            <a href="d3treemap.html"><img src="static/img/treemap.jpg" alt="treemap"></a>
+        </div>
+        <div class="gallery-image">
+            <a href="d3sankey.html"><img src="static/img/sankey.jpg" alt="sankey"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="container-fluid footer">
+    <div class="container">
+      <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+      <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+      <a href="#" target="_blank"><i class="fa fa-dribbble"></i></a>
+      <a href="#" target="_blank"><i class="fa fa-codepen"></i></a>
+    </div>
+  </footer>
+  
+</body>
+</html>
