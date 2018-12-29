@@ -10,6 +10,7 @@ import os
 import json
 from itertools import chain
 
+
 pd.options.display.max_rows = 16
 pd.options.display.max_columns = 16
 
@@ -107,8 +108,21 @@ data = {'nodes':[{'name':n} for n in nodes],
 with open(os.path.join(wdir,'sankey.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=int)
 
+#%%    
+fips = pd.read_csv(os.path.join(wdir,'state_fips_abbr.csv'))
+   
+#%%
+counties = pd.read_csv(os.path.join(wdir,'zcta_county_rel_10.txt'), usecols=[0,1,2,12])
+counties.sort_values(['ZCTA5','COPOP'], ascending=[True,False], inplace=True)
+counties.drop_duplicates('ZCTA5', inplace=True)
+counties['FIPS'] = counties.apply(lambda x: f"{x['STATE']:0>2}{x['COUNTY']:0>3}", axis=1)
+america = cust[(cust['ZipCode'].notnull()) & (cust['Country'].isnull()) & (cust['State'].notnull())]
+Cust = america.merge(counties[['ZCTA5','STATE','FIPS']], how='inner', left_on='ZipCode', right_on='ZCTA5')
 
-
-
+#%%
+FA = orders.merge(Cust, how='inner', on='ID')
+cty = FA.groupby('FIPS')['STATE'].size().reset_index()
+cty.columns = ['fips','value']
+cty.to_csv(os.path.join(wdir,'choropleth_county.csv'), index=False)
 
 
