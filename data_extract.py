@@ -107,9 +107,6 @@ data = {'nodes':[{'name':n} for n in nodes],
         'links':df.to_dict(orient='records')}
 with open(os.path.join(wdir,'sankey.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=int)
-
-#%%    
-fips = pd.read_csv(os.path.join(wdir,'state_fips_abbr.csv'))
    
 #%%
 counties = pd.read_csv(os.path.join(wdir,'zcta_county_rel_10.txt'), usecols=[0,1,2,12])
