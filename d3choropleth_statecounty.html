@@ -95,7 +95,6 @@ Promise.all(promises).then(function(p) {
       .data(topojson.feature(usa, usa.objects.states).features)
     .enter().append("path")
       .attr("d", path)
-      // .attr("class", "state")
       .on("click", clicked)
       .attr("fill", function(d) {
         return color(state_dict.get(d.id))
@@ -106,12 +105,6 @@ Promise.all(promises).then(function(p) {
         var nom = state_names.get(d.id) 
         return nom + ": " + ct
     });
-
-  // state outlines
-  // g.append("path")
-  //     .datum(topojson.mesh(usa, usa.objects.states, function(a, b) { return a !== b; }))
-  //     .attr("class", "state-borders")
-  //     .attr("d", path);
 
   var legendSVG = d3.select("body")
       .append("svg")
@@ -144,12 +137,6 @@ function clicked(d) {
     k = 4;
     centered = d;
   } 
-  // else {
-  //   x = width / 2;
-  //   y = height / 2;
-  //   k = 1;
-  //   centered = null;
-  // }
 
   // displays the counties
   g.selectAll("path")

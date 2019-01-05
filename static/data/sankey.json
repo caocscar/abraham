@@ -1,40 +1,55 @@
 {
   "nodes": [
     {
-      "name": "Friends"
-    },
-    {
-      "name": "Paid"
-    },
-    {
-      "name": "Wife"
-    },
-    {
       "name": "Free"
     },
     {
       "name": "Gift"
     },
     {
-      "name": "Craigslist"
+      "name": "Wife"
     },
     {
-      "name": "StubHub"
+      "name": "Friends"
+    },
+    {
+      "name": "Paid"
+    },
+    {
+      "name": "Craigslist"
     },
     {
       "name": "Amazon"
     },
     {
-      "name": "Self"
-    },
-    {
       "name": "eBay"
     },
     {
-      "name": "Misc"
+      "name": "StubHub"
+    },
+    {
+      "name": "Self"
+    },
+    {
+      "name": "Clothing"
+    },
+    {
+      "name": "CD"
+    },
+    {
+      "name": "Book"
+    },
+    {
+      "name": "Kitchen"
+    },
+    {
+      "name": "Patio&Garden"
     },
     {
       "name": "Coupon"
+    },
+    {
+      "name": "Sports"
     },
     {
       "name": "Electronics"
@@ -43,37 +58,37 @@
       "name": "DVD"
     },
     {
-      "name": "Book"
-    },
-    {
-      "name": "Patio&Garden"
+      "name": "Misc"
     },
     {
       "name": "Furniture"
     },
     {
-      "name": "CD"
-    },
-    {
-      "name": "Clothing"
-    },
-    {
-      "name": "Kitchen"
-    },
-    {
       "name": "Appliance"
     },
     {
-      "name": "Sports"
+      "name": "Expedited"
     },
     {
-      "name": "Parcel Post"
+      "name": "Neutral Site"
+    },
+    {
+      "name": "Email"
+    },
+    {
+      "name": "School"
+    },
+    {
+      "name": "Out & About"
     },
     {
       "name": "Delivery"
     },
     {
-      "name": "School"
+      "name": "UPS Ground"
+    },
+    {
+      "name": "1st Class"
     },
     {
       "name": "Tele-exchange"
@@ -82,25 +97,10 @@
       "name": "In Person"
     },
     {
-      "name": "1st Class"
-    },
-    {
-      "name": "Expedited"
-    },
-    {
-      "name": "Email"
-    },
-    {
-      "name": "Out & About"
-    },
-    {
-      "name": "UPS Ground"
+      "name": "Parcel Post"
     },
     {
       "name": "Media"
-    },
-    {
-      "name": "Neutral Site"
     }
   ],
   "links": [
