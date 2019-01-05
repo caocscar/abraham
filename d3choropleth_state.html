@@ -41,7 +41,7 @@ var tooltipDiv = d3.select("body")
             .style("display", "none");
 
 // Load in my states data!
-d3.csv("static/data/choropleth.csv").then(function(data) {
+d3.csv("static/data/choropleth_state.csv").then(function(data) {
     var dataArray = [];
     for (var d=0; d < data.length; d++) {
       dataArray.push(parseFloat(data[d].value))
