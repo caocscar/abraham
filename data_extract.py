@@ -9,7 +9,9 @@ import pandas as pd
 import os
 import json
 from itertools import chain
-
+from collections import defaultdict
+import networkx as nx
+from networkx.algorithms import community
 
 pd.options.display.max_rows = 16
 pd.options.display.max_columns = 16
@@ -60,24 +62,38 @@ cal.columns = ['count']
 cal.index.name = 'date'
 cal.to_csv(os.path.join(wdir,'calendar.csv'))
 
-#%% csv format for choropleth
-sales[['value']].to_csv(os.path.join(wdir,'choropleth.csv'))
-
 #%% json format for treemap
+# Recursive function
+def make_child(df, name, dtype=float):
+    tree = {'name': name, 'children':[]}
+    for child in df.index.get_level_values(0).unique():
+        if isinstance(df.index, pd.MultiIndex):
+            branch = make_child(df[child], child, dtype)
+            tree['children'].append(branch)
+        else:
+            leaf = {'name':child, 'value':df[child].astype(dtype)}
+            tree['children'].append(leaf)            
+    return tree
+
 tree = fa.groupby(['Site','Type'])['Selling Price'].sum()
-sitecat = fa.groupby(['Site'])['Type'].unique()
-
-data = {'name':'fa','children':[]}
-for site in sitecat.index:
-    C1 = {'name':site,'children':[]}
-    for cat in sitecat.at[site]:
-        C2 = {'name':cat,'size':tree[site][cat]}
-        C1['children'].append(C2)
-    data['children'].append(C1)
-    
+TREE = make_child(tree, 'Foster Abe', int)
 with open(os.path.join(wdir,'treemap.json'),'w') as fout:
-    json.dump(data, fout, indent=2, default=float)
+    json.dump(TREE, fout, indent=2, default=int)
+    
+#%% json format for zoomable treemap
+state_dict = dict(zip(state_names.index,state_names['name']))
+state_dict['AB'] = 'Alberta'
+state_dict['ON'] = 'Ontario'
+state_dict['QC'] = 'Quebec'
+state_dict[''] = 'Other'
 
+fastate = fa.replace({'State':state_dict})
+columns = ['Site','Type','State','Shipping Method']
+tree = fastate.groupby(columns)['Selling Price'].sum()
+TREE = make_child(tree, 'Foster Abe', int)
+with open(os.path.join(wdir,'zoomabletreemap.json'),'w') as fout:
+    json.dump(TREE, fout, indent=2, default=int)
+  
 #%% sankey format
 origin_dict = {'F':'Free','C':'Paid','N':'Wife','G':'Gift','A':'Friends'}      
 sankey = fa.copy()
@@ -108,6 +124,9 @@ data = {'nodes':[{'name':n} for n in nodes],
 with open(os.path.join(wdir,'sankey.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=int)
    
+#%% csv format for choropleth
+sales[['value']].to_csv(os.path.join(wdir,'choropleth.csv'))
+
 #%%
 counties = pd.read_csv(os.path.join(wdir,'zcta_county_rel_10.txt'), usecols=[0,1,2,12])
 counties.sort_values(['ZCTA5','COPOP'], ascending=[True,False], inplace=True)
@@ -121,5 +140,32 @@ FA = orders.merge(Cust, how='inner', on='ID')
 cty = FA.groupby('FIPS')['STATE'].size().reset_index()
 cty.columns = ['fips','value']
 cty.to_csv(os.path.join(wdir,'choropleth_county.csv'), index=False)
+
+#%% json for force-directed graph
+columns = ['Site','State']
+links = fa.groupby(columns).size()
+L = links.reset_index()
+
+data = defaultdict(list)
+for source, target, value in zip(L['Site'],L['State'],L[0]):
+    data['links'].append({'source':source, 'target':target, 'value':value})
+
+from random import randint
+nodes = set(L['Site']).union(set(L['State']))
+for node in nodes:
+    data['nodes'].append({'id':node, 'group':randint(1,5)})
+
+wdir = r'C:\Users\caoa\Box Sync\d3js Examples\v5\forcedirect'
+with open(os.path.join(wdir,'forcedirect.json'),'w') as fout:
+    json.dump(data, fout, indent=2, default=int)
+
+#%%
+G = nx.Graph()
+edgelist = list(zip(L['Site'],L['State'],L[0]))
+G.add_weighted_edges_from(edgelist)
+partition = community_louvain.best_partition(G)
+
+#for source, target, value in zip(L['Site'],L['State'],L[0]):
+#    G.add_edge(source, target, weight=value)
 
 
