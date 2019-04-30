@@ -414,23 +414,23 @@
   "nodes": [
     {
       "id": "",
-      "group": 1
-    },
-    {
-      "id": "NV",
       "group": 4
     },
     {
+      "id": "NV",
+      "group": 3
+    },
+    {
       "id": "MO",
-      "group": 2
+      "group": 3
     },
     {
       "id": "AZ",
-      "group": 1
+      "group": 2
     },
     {
       "id": "MD",
-      "group": 1
+      "group": 2
     },
     {
       "id": "QC",
@@ -438,23 +438,23 @@
     },
     {
       "id": "TX",
-      "group": 3
+      "group": 5
     },
     {
       "id": "OR",
-      "group": 2
+      "group": 5
     },
     {
       "id": "MT",
-      "group": 1
-    },
-    {
-      "id": "NH",
       "group": 4
     },
     {
-      "id": "OH",
+      "id": "NH",
       "group": 5
+    },
+    {
+      "id": "OH",
+      "group": 1
     },
     {
       "id": "PA",
@@ -462,7 +462,7 @@
     },
     {
       "id": "SC",
-      "group": 1
+      "group": 4
     },
     {
       "id": "Amazon",
@@ -474,51 +474,51 @@
     },
     {
       "id": "VT",
-      "group": 1
+      "group": 4
     },
     {
       "id": "TN",
-      "group": 2
+      "group": 3
     },
     {
       "id": "StubHub",
-      "group": 1
+      "group": 3
     },
     {
       "id": "Self",
-      "group": 2
-    },
-    {
-      "id": "NC",
-      "group": 3
-    },
-    {
-      "id": "IL",
-      "group": 3
-    },
-    {
-      "id": "NY",
-      "group": 4
-    },
-    {
-      "id": "OK",
       "group": 1
     },
     {
-      "id": "ID",
+      "id": "NC",
+      "group": 5
+    },
+    {
+      "id": "IL",
+      "group": 1
+    },
+    {
+      "id": "NY",
       "group": 2
+    },
+    {
+      "id": "OK",
+      "group": 3
+    },
+    {
+      "id": "ID",
+      "group": 5
     },
     {
       "id": "UT",
-      "group": 4
+      "group": 2
     },
     {
       "id": "AB",
-      "group": 4
+      "group": 5
     },
     {
       "id": "MI",
-      "group": 2
+      "group": 3
     },
     {
       "id": "LA",
@@ -526,11 +526,11 @@
     },
     {
       "id": "Craigslist",
-      "group": 4
+      "group": 2
     },
     {
       "id": "MA",
-      "group": 5
+      "group": 3
     },
     {
       "id": "FL",
@@ -542,27 +542,27 @@
     },
     {
       "id": "CT",
-      "group": 2
+      "group": 3
     },
     {
       "id": "WI",
-      "group": 3
+      "group": 2
     },
     {
       "id": "AL",
-      "group": 3
+      "group": 2
     },
     {
       "id": "MN",
-      "group": 4
+      "group": 3
     },
     {
       "id": "eBay",
-      "group": 5
+      "group": 2
     },
     {
       "id": "NE",
-      "group": 1
+      "group": 4
     },
     {
       "id": "IN",
@@ -570,7 +570,7 @@
     },
     {
       "id": "CA",
-      "group": 1
+      "group": 4
     },
     {
       "id": "CO",
@@ -578,19 +578,19 @@
     },
     {
       "id": "WA",
-      "group": 1
+      "group": 3
     },
     {
       "id": "ME",
-      "group": 2
+      "group": 4
     },
     {
       "id": "DC",
-      "group": 5
+      "group": 4
     },
     {
       "id": "ON",
-      "group": 1
+      "group": 4
     },
     {
       "id": "VA",
@@ -598,15 +598,15 @@
     },
     {
       "id": "NJ",
-      "group": 5
+      "group": 1
     },
     {
       "id": "WV",
-      "group": 4
+      "group": 5
     },
     {
       "id": "KS",
-      "group": 3
+      "group": 5
     },
     {
       "id": "GA",

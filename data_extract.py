@@ -50,7 +50,7 @@ sales.drop('', axis=0, inplace=True)
 #%% Replace state abbreviation with full name
 state_names = pd.read_csv(os.path.join(wdir,'state_fips_abbr.csv'), usecols=[0,2], index_col=1)
 sales = state_names.merge(sales, how='left', left_index=True, right_index=True)
-sales.set_index('state', inplace=True)
+sales.set_index('name', inplace=True)
 sales = sales.fillna(0).astype(int)
 # Create Total column
 sales['value'] = sales.sum(axis=1)
@@ -80,7 +80,7 @@ with open(os.path.join(wdir,'treemap.json'),'w') as fout:
     json.dump(TREE, fout, indent=2, default=int)
     
 #%% json format for zoomable treemap
-state_dict = dict(zip(state_names.index,state_names['state']))
+state_dict = dict(zip(state_names.index,state_names['name']))
 state_dict['AB'] = 'Alberta'
 state_dict['ON'] = 'Ontario'
 state_dict['QC'] = 'Quebec'
@@ -124,9 +124,10 @@ with open(os.path.join(wdir,'sankey.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=int)
    
 #%% csv format for choropleth
+sales.index.name = 'state'
 sales[['value']].to_csv(os.path.join(wdir,'choropleth_state.csv'))
 
-#%%
+#%% Miami-Dade county is an even fips county; need to make sure county_names.csv is correct
 counties = pd.read_csv(os.path.join(wdir,'zcta_county_rel_10.txt'), usecols=[0,1,2,12])
 counties.sort_values(['ZCTA5','COPOP'], ascending=[True,False], inplace=True)
 counties.drop_duplicates('ZCTA5', inplace=True)
