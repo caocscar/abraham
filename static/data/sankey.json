@@ -1,28 +1,22 @@
 {
   "nodes": [
     {
-      "name": "Free"
-    },
-    {
-      "name": "Gift"
-    },
-    {
-      "name": "Wife"
+      "name": "Paid"
     },
     {
       "name": "Friends"
     },
     {
-      "name": "Paid"
+      "name": "Gift"
+    },
+    {
+      "name": "Free"
+    },
+    {
+      "name": "Wife"
     },
     {
       "name": "Craigslist"
-    },
-    {
-      "name": "Amazon"
-    },
-    {
-      "name": "eBay"
     },
     {
       "name": "StubHub"
@@ -31,73 +25,79 @@
       "name": "Self"
     },
     {
-      "name": "Clothing"
+      "name": "eBay"
     },
     {
-      "name": "CD"
-    },
-    {
-      "name": "Book"
-    },
-    {
-      "name": "Kitchen"
-    },
-    {
-      "name": "Patio&Garden"
-    },
-    {
-      "name": "Coupon"
-    },
-    {
-      "name": "Sports"
-    },
-    {
-      "name": "Electronics"
-    },
-    {
-      "name": "DVD"
-    },
-    {
-      "name": "Misc"
-    },
-    {
-      "name": "Furniture"
+      "name": "Amazon"
     },
     {
       "name": "Appliance"
     },
     {
-      "name": "Expedited"
+      "name": "Kitchen"
+    },
+    {
+      "name": "Sports"
+    },
+    {
+      "name": "DVD"
+    },
+    {
+      "name": "Coupon"
+    },
+    {
+      "name": "Clothing"
+    },
+    {
+      "name": "Electronics"
+    },
+    {
+      "name": "Misc"
+    },
+    {
+      "name": "CD"
+    },
+    {
+      "name": "Patio&Garden"
+    },
+    {
+      "name": "Book"
+    },
+    {
+      "name": "Furniture"
     },
     {
       "name": "Neutral Site"
     },
     {
-      "name": "Email"
-    },
-    {
-      "name": "School"
-    },
-    {
-      "name": "Out & About"
+      "name": "UPS Ground"
     },
     {
       "name": "Delivery"
     },
     {
-      "name": "UPS Ground"
+      "name": "Parcel Post"
+    },
+    {
+      "name": "Expedited"
     },
     {
       "name": "1st Class"
     },
     {
-      "name": "Tele-exchange"
-    },
-    {
       "name": "In Person"
     },
     {
-      "name": "Parcel Post"
+      "name": "Email"
+    },
+    {
+      "name": "Out & About"
+    },
+    {
+      "name": "Tele-exchange"
+    },
+    {
+      "name": "School"
     },
     {
       "name": "Media"
@@ -152,7 +152,7 @@
     {
       "source": "Gift",
       "target": "eBay",
-      "value": 9
+      "value": 10
     },
     {
       "source": "Paid",
@@ -177,7 +177,7 @@
     {
       "source": "Paid",
       "target": "eBay",
-      "value": 31
+      "value": 36
     },
     {
       "source": "Wife",
@@ -337,7 +337,7 @@
     {
       "source": "eBay",
       "target": "Clothing",
-      "value": 14
+      "value": 17
     },
     {
       "source": "eBay",
@@ -357,12 +357,12 @@
     {
       "source": "eBay",
       "target": "Kitchen",
-      "value": 1
+      "value": 2
     },
     {
       "source": "eBay",
       "target": "Misc",
-      "value": 18
+      "value": 20
     },
     {
       "source": "eBay",
@@ -437,7 +437,12 @@
     {
       "source": "Clothing",
       "target": "Expedited",
-      "value": 6
+      "value": 8
+    },
+    {
+      "source": "Clothing",
+      "target": "Parcel Post",
+      "value": 1
     },
     {
       "source": "Coupon",
@@ -567,7 +572,7 @@
     {
       "source": "Kitchen",
       "target": "Expedited",
-      "value": 1
+      "value": 2
     },
     {
       "source": "Kitchen",
@@ -582,7 +587,7 @@
     {
       "source": "Misc",
       "target": "1st Class",
-      "value": 14
+      "value": 15
     },
     {
       "source": "Misc",
@@ -592,7 +597,7 @@
     {
       "source": "Misc",
       "target": "Expedited",
-      "value": 11
+      "value": 12
     },
     {
       "source": "Misc",

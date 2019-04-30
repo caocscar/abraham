@@ -8,12 +8,12 @@ Friends,Craigslist,5
 Friends,eBay,2
 Gift,Amazon,11
 Gift,Craigslist,6
-Gift,eBay,9
+Gift,eBay,10
 Paid,Amazon,65
 Paid,Craigslist,69
 Paid,Self,4
 Paid,StubHub,5
-Paid,eBay,31
+Paid,eBay,36
 Wife,Amazon,54
 Wife,Craigslist,31
 Wife,Self,2
@@ -45,12 +45,12 @@ Self,Sports,1
 StubHub,Misc,5
 eBay,Appliance,1
 eBay,Book,5
-eBay,Clothing,14
+eBay,Clothing,17
 eBay,Coupon,4
 eBay,DVD,2
 eBay,Electronics,14
-eBay,Kitchen,1
-eBay,Misc,18
+eBay,Kitchen,2
+eBay,Misc,20
 eBay,Sports,5
 Appliance,Delivery,3
 Appliance,Expedited,2
@@ -65,7 +65,8 @@ CD,1st Class,6
 CD,Expedited,1
 CD,Media,2
 Clothing,1st Class,8
-Clothing,Expedited,6
+Clothing,Expedited,8
+Clothing,Parcel Post,1
 Coupon,1st Class,4
 Coupon,Email,2
 Coupon,Neutral Site,1
@@ -91,12 +92,12 @@ Furniture,Parcel Post,1
 Furniture,School,1
 Kitchen,1st Class,1
 Kitchen,Delivery,2
-Kitchen,Expedited,1
+Kitchen,Expedited,2
 Kitchen,In Person,5
 Kitchen,Neutral Site,2
-Misc,1st Class,14
+Misc,1st Class,15
 Misc,Delivery,3
-Misc,Expedited,11
+Misc,Expedited,12
 Misc,In Person,48
 Misc,Neutral Site,1
 Misc,Parcel Post,2

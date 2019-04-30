@@ -4,26 +4,25 @@ Created on Fri Feb 10 10:59:14 2017
 
 @author: caoa
 """
-
 import pandas as pd
 import os
 import json
 from itertools import chain
 from collections import defaultdict
-import networkx as nx
-from networkx.algorithms import community
 
 pd.options.display.max_rows = 16
 pd.options.display.max_columns = 16
 
 #%% Read data
+# 32-bit MS Access and 64-bit Python are incompatible and thus cannot read from database directly
+# Have to manually export Customers and Orders table
 wdir = os.path.join('static','data')
 filename1 = 'Customers.txt'
 filename2 = 'Orders.txt'
 filepath1 = os.path.join(wdir,filename1)
 filepath2 = os.path.join(wdir,filename2)
 cust = pd.read_csv(os.path.join(wdir,filename1), sep='|')
-orders = pd.read_csv(os.path.join(wdir,filename2), sep='|')
+orders = pd.read_csv(os.path.join(wdir,filename2), sep='|', nrows=600)
 
 #%%
 orders = orders.loc[:,'TransID':'Zone']
@@ -51,7 +50,7 @@ sales.drop('', axis=0, inplace=True)
 #%% Replace state abbreviation with full name
 state_names = pd.read_csv(os.path.join(wdir,'state_fips_abbr.csv'), usecols=[0,2], index_col=1)
 sales = state_names.merge(sales, how='left', left_index=True, right_index=True)
-sales.set_index('name', inplace=True)
+sales.set_index('state', inplace=True)
 sales = sales.fillna(0).astype(int)
 # Create Total column
 sales['value'] = sales.sum(axis=1)
@@ -81,7 +80,7 @@ with open(os.path.join(wdir,'treemap.json'),'w') as fout:
     json.dump(TREE, fout, indent=2, default=int)
     
 #%% json format for zoomable treemap
-state_dict = dict(zip(state_names.index,state_names['name']))
+state_dict = dict(zip(state_names.index,state_names['state']))
 state_dict['AB'] = 'Alberta'
 state_dict['ON'] = 'Ontario'
 state_dict['QC'] = 'Quebec'
@@ -125,7 +124,7 @@ with open(os.path.join(wdir,'sankey.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=int)
    
 #%% csv format for choropleth
-sales[['value']].to_csv(os.path.join(wdir,'choropleth.csv'))
+sales[['value']].to_csv(os.path.join(wdir,'choropleth_state.csv'))
 
 #%%
 counties = pd.read_csv(os.path.join(wdir,'zcta_county_rel_10.txt'), usecols=[0,1,2,12])
@@ -155,17 +154,6 @@ nodes = set(L['Site']).union(set(L['State']))
 for node in nodes:
     data['nodes'].append({'id':node, 'group':randint(1,5)})
 
-wdir = r'C:\Users\caoa\Box Sync\d3js Examples\v5\forcedirect'
 with open(os.path.join(wdir,'forcedirect.json'),'w') as fout:
     json.dump(data, fout, indent=2, default=int)
-
-#%%
-G = nx.Graph()
-edgelist = list(zip(L['Site'],L['State'],L[0]))
-G.add_weighted_edges_from(edgelist)
-partition = community_louvain.best_partition(G)
-
-#for source, target, value in zip(L['Site'],L['State'],L[0]):
-#    G.add_edge(source, target, weight=value)
-
 
